@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">玉津咖啡</string>
+    <string name="yj_slogan">啟程 為夢想舉杯</string>
+    <string name="yj_slogan_wng">TAKE ME AWAY</string>
+    <string name="yj_acc">帳號：</string>
+    <string name="yj_pwd">密碼：</string>
+</resources>
