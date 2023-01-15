@@ -1,11 +1,16 @@
 package app.myproject.yujincoffee_app;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,6 +30,23 @@ import okhttp3.Response;
 public class logPageActivity extends AppCompatActivity {
     ActivityLogPageBinding binding;
     ExecutorService executorService;
+
+    Handler loginResultHandler=new Handler(Looper.getMainLooper()){
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            Bundle bundle=msg.getData();
+            if(bundle.getInt("status")==666){
+                Toast.makeText(logPageActivity.this, "歡迎回來", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(logPageActivity.this, indextPageActivity.class);
+                startActivity(intent);
+            }else{
+                Toast.makeText(logPageActivity.this, bundle.getString("mesg"), Toast.LENGTH_LONG).show();
+            }
+
+
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,7 +113,20 @@ public class logPageActivity extends AppCompatActivity {
                 String responseString=response.body().string();
                 Log.e("API回應",responseString);
                 //Response也應該是JASON格式回傳 由APP端確認登入結果
-            } catch (IOException e) {
+
+                JSONObject result=new JSONObject(responseString);
+                Message m=loginResultHandler.obtainMessage();
+                Bundle bundle=new Bundle();
+                if(result.getInt("status")==666){
+                    bundle.putString("mesg",result.getString("mesg"));
+                    bundle.putInt("status",result.getInt("status"));
+                }else{
+                    bundle.putString("mesg","登入失敗 請確認帳號及密碼是否正確");
+                    bundle.putInt("status",result.getInt("status"));
+                }
+                m.setData(bundle);
+                loginResultHandler.sendMessage(m);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
