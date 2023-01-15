@@ -36,4 +36,7 @@
     <color name="yj_yel001">#FFFFE55F</color>
     <color name="yj_yel002">#FFFCE054</color>
     <color name="yj_yel003">#FFFFD358</color>
+    <color name="yj_back_yel001">#FFFFE69F</color>
+    <color name="yj_back_yel002">#FFFFECB5</color>
+
 </resources>
