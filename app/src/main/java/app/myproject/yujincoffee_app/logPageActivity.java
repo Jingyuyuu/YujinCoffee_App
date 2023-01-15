@@ -73,7 +73,7 @@ public class logPageActivity extends AppCompatActivity {
             }
         });
 
-
+//wu@gmail.co
     }
 
     class SimpleAPIWorker implements Runnable{
@@ -88,6 +88,8 @@ public class logPageActivity extends AppCompatActivity {
         public void run() {
             try {
                 Response response=client.newCall(request).execute();
+                String responseString=response.body().string();
+                Log.e("API回應",responseString);
                 //Response也應該是JASON格式回傳 由APP端確認登入結果
             } catch (IOException e) {
                 e.printStackTrace();
