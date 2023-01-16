@@ -16,6 +16,12 @@
         android:theme="@style/Theme.YujinCoffee_App"
         tools:targetApi="31">
         <activity
+            android:name=".PointChangeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyFavoriteActivity"
+            android:exported="false" />
+        <activity
             android:name=".memberdataActivity"
             android:exported="true">
             <intent-filter>

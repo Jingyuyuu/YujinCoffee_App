@@ -96,11 +96,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mempay" />
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="88dp"
-        android:layout_height="81dp"
-        android:layout_marginStart="248dp"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="465dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
