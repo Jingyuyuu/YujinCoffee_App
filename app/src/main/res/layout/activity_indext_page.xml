@@ -37,7 +37,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView7"
-        app:srcCompat="@drawable/qrcodedemo" />
+        app:srcCompat="@drawable/qrcodedemo"
+        tools:srcCompat="@drawable/FamilyFB短網址QR" />
 
     <ImageButton
         android:id="@+id/seasonnew"

@@ -16,6 +16,9 @@
         android:theme="@style/Theme.YujinCoffee_App"
         tools:targetApi="31">
         <activity
+            android:name=".storelistActivity"
+            android:exported="false" />
+        <activity
             android:name=".seasonnew"
             android:exported="false">
             <meta-data
