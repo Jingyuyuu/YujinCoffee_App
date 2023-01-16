@@ -1,5 +1,6 @@
 package app.myproject.yujincoffee_app;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -24,6 +25,12 @@ public class indextPageActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        binding.seasonnew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(indextPageActivity.this,seasonnew.class);
+                startActivity(intent);
+            }
+        });
     }
 }
