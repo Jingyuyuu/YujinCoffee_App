@@ -3,13 +3,19 @@ package app.myproject.yujincoffee_app;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+
+import app.myproject.yujincoffee_app.databinding.ActivityStorelistBinding;
 
 public class storelistActivity extends AppCompatActivity {
 
-    storelistActivity binding;
+     ActivityStorelistBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_storelist);
+        binding=ActivityStorelistBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
     }
 }
