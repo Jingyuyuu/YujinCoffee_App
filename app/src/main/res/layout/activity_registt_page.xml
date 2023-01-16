@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.752"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reg_member_name8"
+        app:layout_constraintTop_toBottomOf="@+id/regStore"
         app:layout_constraintVertical_bias="0.122" />
 
     <Button
@@ -27,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.374"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reg_member_name8"
+        app:layout_constraintTop_toBottomOf="@+id/regStore"
         app:layout_constraintVertical_bias="0.122" />
 
     <TextView
@@ -59,7 +59,7 @@
         app:layout_constraintVertical_bias="0.131" />
 
     <EditText
-        android:id="@+id/reg_member_name2"
+        android:id="@+id/regName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/my_edit_text_lightter"
@@ -88,7 +88,7 @@
         app:layout_constraintVertical_bias="0.233" />
 
     <EditText
-        android:id="@+id/reg_member_name"
+        android:id="@+id/regEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/my_edit_text_lightter"
@@ -173,7 +173,7 @@
         app:layout_constraintVertical_bias="0.528" />
 
     <EditText
-        android:id="@+id/reg_member_name6"
+        android:id="@+id/regPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/my_edit_text_lightter"
@@ -202,7 +202,7 @@
         app:layout_constraintVertical_bias="0.625" />
 
     <EditText
-        android:id="@+id/reg_member_name7"
+        android:id="@+id/regPaymement"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/my_edit_text_lightter"
@@ -217,7 +217,7 @@
         app:layout_constraintVertical_bias="0.598" />
 
     <EditText
-        android:id="@+id/reg_member_name8"
+        android:id="@+id/regStore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/my_edit_text_lightter"
