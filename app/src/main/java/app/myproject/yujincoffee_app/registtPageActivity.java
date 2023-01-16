@@ -58,6 +58,7 @@ public class registtPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //請將使用者資料 封裝成JSON格式 回傳給SpringBoot Controller進行驗證
+                //下拉選單範例https://github.com/miscoder002/ReivewApphttps://github.com/miscoder002/ReivewApp
                 JSONObject packet=new JSONObject();
                 try {
 
