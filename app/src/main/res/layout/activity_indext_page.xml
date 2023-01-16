@@ -2,8 +2,52 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".indextPageActivity">
+    android:orientation="vertical"
+    tools:context=".indextPageActivity" >
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/yujinmain" />
+
+    <ImageButton
+        android:id="@+id/menubtn"
+        android:layout_width="350dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/seasonnew"
+        app:layout_constraintStart_toStartOf="@+id/memQRcode"
+        app:layout_constraintTop_toBottomOf="@+id/memQRcode"
+        app:srcCompat="@drawable/menupic" />
+
+    <ImageButton
+        android:id="@+id/memQRcode"
+        android:layout_width="350dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="20dp"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView7"
+        app:srcCompat="@drawable/qrcodedemo" />
+
+    <ImageButton
+        android:id="@+id/seasonnew"
+        android:layout_width="350dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="20dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="@+id/memQRcode"
+        app:layout_constraintTop_toBottomOf="@+id/menubtn"
+        app:srcCompat="@drawable/newpic"
+        tools:srcCompat="@drawable/newpic2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
