@@ -33,6 +33,14 @@ public class registtPageActivity extends AppCompatActivity {
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
+            Bundle bundle=msg.getData();
+            if(bundle.getInt("status")==000){
+                Toast.makeText(registtPageActivity.this, "註冊成功", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(registtPageActivity.this, indextPageActivity.class);
+                startActivity(intent);
+            }else{
+                Toast.makeText(registtPageActivity.this, bundle.getString("mesg"), Toast.LENGTH_LONG).show();
+            }
 
         }
     };
@@ -105,6 +113,22 @@ public class registtPageActivity extends AppCompatActivity {
         public void run() {
             try {
                 Response response=client.newCall(request).execute();
+                String responseString=response.body().string();
+                Log.e("API回應",responseString);
+                //Response也應該是JASON格式回傳 由APP端確認登入結果
+
+                JSONObject result=new JSONObject(responseString);
+                Message m=registerResultHandler.obtainMessage();
+                Bundle bundle=new Bundle();
+                if(result.getInt("status")==000){
+                    bundle.putString("mesg",result.getString("mesg"));
+                    bundle.putInt("status",result.getInt("status"));
+                }else{
+                    bundle.putString("mesg","email已經存在");
+                    bundle.putInt("status",result.getInt("status"));
+                }
+                m.setData(bundle);
+                registerResultHandler.sendMessage(m);
             } catch (Exception e) {
                 e.printStackTrace();
             }
