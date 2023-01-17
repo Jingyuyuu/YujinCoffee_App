@@ -92,6 +92,17 @@ public class logPageActivity extends AppCompatActivity {
                 Intent intent = new Intent(logPageActivity.this, registtPageActivity.class);
                 Bundle datas = new Bundle();
                 startActivity(intent);
+
+                /*ShoppingCart 練習
+
+                ShoppingCart a= ShoppingCart.newInstance();
+                Drink coffee = new Drink("奶茶","123","冰","0.5");
+                a.drinkItems.add(coffee);
+                Log.e("購物車",a.drinkItems.get(0).getName()
+                +" "+a.drinkItems.get(0).getIce()+
+                        " "+a.drinkItems.get(0).getSugar()
+                +""+a.drinkItems.get(0).getPrice());
+                 */
             }
         });
 

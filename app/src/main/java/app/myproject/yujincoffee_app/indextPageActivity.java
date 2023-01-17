@@ -18,10 +18,11 @@ public class indextPageActivity extends AppCompatActivity {
         binding=ActivityIndextPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
         binding.menubtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(indextPageActivity.this,菜單頁面.class);
+                Intent intent=new Intent(indextPageActivity.this,indextPageActivity.class);
                 startActivity(intent);
             }
         });
