@@ -6,6 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".memberdataaPageActivity">
 
+    <TextView
+        android:id="@+id/memberPhoneTXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.212"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.57"
+        tools:text="顯示會員電話" />
+
+    <TextView
+        android:id="@+id/memberPoints6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="付款方式"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.243"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.785" />
+
+    <TextView
+        android:id="@+id/memberPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="付款方式"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.243"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toBottomOf="@+id/memberPoints6"
+        app:layout_constraintVertical_bias="0.153" />
+
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
@@ -16,84 +52,186 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.075"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="會員點數："
-        tools:layout_editor_absoluteX="71dp"
-        tools:layout_editor_absoluteY="192dp" />
+        app:srcCompat="@drawable/qrcode"
+        tools:srcCompat="@drawable/qrcode" />
 
     <TextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="會員點數："
+        android:text="@string/yj_m_pointTittle"
         android:textColor="@color/dark_gray001"
-        tools:layout_editor_absoluteX="71dp"
-        tools:layout_editor_absoluteY="192dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.184"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.341" />
 
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="會員姓名："
+        android:text="@string/yj_m_nameTittle"
         android:textColor="@color/dark_gray001"
-        tools:layout_editor_absoluteX="71dp"
-        tools:layout_editor_absoluteY="234dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.184"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView14"
+        app:layout_constraintVertical_bias="0.063" />
 
     <TextView
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="會員信箱："
+        android:text="@string/yj_m_emailTittle"
         android:textColor="@color/dark_gray001"
-        tools:layout_editor_absoluteX="71dp"
-        tools:layout_editor_absoluteY="274dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView15"
+        app:layout_constraintVertical_bias="0.084" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/yj_m_phoneTittle"
+        android:textColor="@color/dark_gray001"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.184"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView15"
+        app:layout_constraintVertical_bias="0.219" />
 
     <TextView
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="會員電話："
+        android:text="@string/yj_m_pwdTittle"
         android:textColor="@color/dark_gray001"
-        tools:layout_editor_absoluteX="71dp"
-        tools:layout_editor_absoluteY="315dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.184"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16"
+        app:layout_constraintVertical_bias="0.253" />
 
     <TextView
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="預設店家："
+        android:text="@string/yj_m_pwd2Tittle"
         android:textColor="@color/dark_gray001"
-        tools:layout_editor_absoluteX="71dp"
-        tools:layout_editor_absoluteY="355dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.108"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView17"
+        app:layout_constraintVertical_bias="0.113" />
 
     <TextView
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="預設付款方式："
+        android:text="@string/yj_m_presetStoreTittle"
         android:textColor="@color/dark_gray001"
-        tools:layout_editor_absoluteX="42dp"
-        tools:layout_editor_absoluteY="392dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.108"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView18"
+        app:layout_constraintVertical_bias="0.122" />
 
     <TextView
-        android:id="@+id/memberPoints"
+        android:id="@+id/textView26"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="149dp"
-        tools:layout_editor_absoluteY="192dp"
-        tools:text="顯示memberPoints" />
+        android:text="@string/yj_m_presetPaymentTittle"
+        android:textColor="@color/dark_gray001"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.108"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView18"
+        app:layout_constraintVertical_bias="0.335" />
+
+    <TextView
+        android:id="@+id/memberNameTXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.211"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.415"
+        tools:text="顯示會員姓名" />
+
+    <TextView
+        android:id="@+id/memberEmailTXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1000點"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.211"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498"
+        tools:text="顯示會員帳號" />
+
+    <TextView
+        android:id="@+id/memberPointsTXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.211"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.34"
+        tools:text="顯示會員點數" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/memberReviseBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="修改會員資料"
-        tools:layout_editor_absoluteX="256dp"
-        tools:layout_editor_absoluteY="510dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.944"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.929" />
+
+    <EditText
+        android:id="@+id/memberPwdTXT"
+        android:layout_width="97dp"
+        android:layout_height="32dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/memberPoints6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.226"
+        app:layout_constraintStart_toEndOf="@+id/textView17"
+        app:layout_constraintTop_toBottomOf="@+id/memberPhoneTXT"
+        app:layout_constraintVertical_bias="0.347" />
+
+    <EditText
+        android:id="@+id/memberPwdTXT2"
+        android:layout_width="97dp"
+        android:layout_height="32dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/memberPoints6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.226"
+        app:layout_constraintStart_toEndOf="@+id/textView17"
+        app:layout_constraintTop_toBottomOf="@+id/memberPhoneTXT"
+        app:layout_constraintVertical_bias="0.93" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
