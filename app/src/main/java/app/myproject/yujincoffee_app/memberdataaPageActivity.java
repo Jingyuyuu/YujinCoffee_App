@@ -36,8 +36,8 @@ public class memberdataaPageActivity extends AppCompatActivity {
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
             Bundle bundle=msg.getData();
-            if(bundle.getInt("status")==000){
-                Toast.makeText(memberdataaPageActivity.this, "註冊成功", Toast.LENGTH_SHORT).show();
+            if(bundle.getInt("status")==123){
+                Toast.makeText(memberdataaPageActivity.this, bundle.getString("mesg"), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(memberdataaPageActivity.this, indextPageActivity.class);
                 startActivity(intent);
             }else{
@@ -51,50 +51,45 @@ public class memberdataaPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding=ActivityMemberdataaPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding.memberPointsTXT.setText("會員點數");
-        binding.memberNameTXT.setText("會員姓名");
-        binding.memberNameTXT.setText("會員信箱");
-        binding.memberNameTXT.setText("會員電話");
+        binding.memberPointsTX.setText("100");
+        binding.memberEmailTX.setText("wu@gmail.com");
+        binding.memberNameT.setText("吳晶瑜");
+        binding.memberPhoneT.setText("0912345677");
+
         binding.memberReviseBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //傳送修改資料給Server寫入資料庫
+                    //傳送修改資料給Server寫入資料庫
+              @Override
+              public void onClick(View view) {
+              //請將使用者資料 封裝成JSON格式 回傳給SpringBoot Controller進行驗證
+              //下拉選單範例https://github.com/miscoder002/ReivewApphttps://github.com/miscoder002/ReivewApp
+              JSONObject packet=new JSONObject();
+              try {
 
-                binding.memberReviseBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        //請將使用者資料 封裝成JSON格式 回傳給SpringBoot Controller進行驗證
-                        //下拉選單範例https://github.com/miscoder002/ReivewApphttps://github.com/miscoder002/ReivewApp
-                        JSONObject packet=new JSONObject();
-                        try {
+                  JSONObject newMemberRegData=new JSONObject();
+                  newMemberRegData.put("name",binding.memberNameT.getText().toString());
+                  newMemberRegData.put("phone",binding.memberPhoneT.getText().toString());
+                  newMemberRegData.put("pwd",binding.memberPointsTX.getText().toString());
+                  newMemberRegData.put("email",binding.memberEmailTX.getText().toString());
+                  packet.put("NewMemberData",newMemberRegData);
 
-                            JSONObject newMemberRegData=new JSONObject();
-                            newMemberRegData.put("name",binding.memberNameTXT.getText().toString());
-                            newMemberRegData.put("phone",binding.memberPhoneTXT.getText().toString());
-                            newMemberRegData.put("email",binding.memberEmailTXT.getText().toString());
-                            newMemberRegData.put("pwd",binding.memberPwdTXT.getText().toString());
+                  Log.e("JSON",packet.toString(4));
+                  Toast.makeText(memberdataaPageActivity.this, "已送出訊息", Toast.LENGTH_SHORT).show();
+              } catch (JSONException e) {
+                  e.printStackTrace();
+              }
 
-                            packet.put("NewMemberData",newMemberRegData);
-                            Log.e("JSON",packet.toString(4));
-                            Toast.makeText(memberdataaPageActivity.this, "送出修改後的會員資料", Toast.LENGTH_SHORT).show();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+              MediaType mType=MediaType.parse("application/json");
+              RequestBody body=RequestBody.create(packet.toString(),mType);
+              //VM IP=20.187.101.131
+                  Request request=new Request.Builder()
+                          .url("http://192.168.43.21:8216/api/member/reNewMemberData")
+                          .post(body)
+                          .build();
+                  memberdataaPageActivity.SimpleAPIWorker apiCaller=new memberdataaPageActivity.SimpleAPIWorker(request);
+                  //產生Task準備給executor執行
+                  executorService.execute(apiCaller);
 
-                        MediaType mType=MediaType.parse("application/json");
-                        RequestBody body=RequestBody.create(packet.toString(),mType);
-                        //VM IP=20.187.101.131
-                        Request request=new Request.Builder()
-                                .url("http://192.168.255.123:8216/api/member/reNewMemberData")
-                                .post(body)
-                                .build();
-                        memberdataaPageActivity.SimpleAPIWorker apiCaller=new memberdataaPageActivity.SimpleAPIWorker(request);
-                        //產生Task準備給executor執行
-                        executorService.execute(apiCaller);
 
-                    }
-
-                });
             }
         });
 
@@ -119,11 +114,11 @@ public class memberdataaPageActivity extends AppCompatActivity {
                 JSONObject result=new JSONObject(responseString);
                 Message m=memberDataHandler.obtainMessage();
                 Bundle bundle=new Bundle();
-                if(result.getInt("status")==000){
+                if(result.getInt("status")==123){
                     bundle.putString("mesg",result.getString("mesg"));
                     bundle.putInt("status",result.getInt("status"));
                 }else{
-                    bundle.putString("mesg","email已經存在");
+                    bundle.putString("mesg","會員更新失敗，請洽程式開發人員");
                     bundle.putInt("status",result.getInt("status"));
                 }
                 m.setData(bundle);
