@@ -4,11 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class PointChangeActivity extends AppCompatActivity {
+import app.myproject.yujincoffee_app.databinding.ActivityPointChangeBinding;
 
+public class PointChangeActivity extends AppCompatActivity {
+//5塊獲得1點
+    ActivityPointChangeBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_point_change);
+        binding=ActivityPointChangeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
     }
 }

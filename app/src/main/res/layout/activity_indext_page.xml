@@ -37,7 +37,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView7"
-        tools:srcCompat="@drawable/FamilyFB短網址QR" />
+        tools:srcCompat="@drawable/會員條碼" />
 
     <ImageButton
         android:id="@+id/seasonnew"
@@ -47,7 +47,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="@+id/memQRcode"
         app:layout_constraintTop_toBottomOf="@+id/menubtn"
-        app:srcCompat="@drawable/newpic"
+
         tools:srcCompat="@drawable/newpic2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

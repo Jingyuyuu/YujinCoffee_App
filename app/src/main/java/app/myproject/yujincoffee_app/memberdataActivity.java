@@ -42,26 +42,32 @@ public class memberdataActivity extends AppCompatActivity {
         //用id判斷點了哪個選項
         if(id == R.id.membersetting){
             Intent intent=new Intent(memberdataActivity.this,會員設定頁面.class);
+            startActivity(intent);
             return true;
         }
         else if(id == R.id.myorder){
             Intent intent=new Intent(memberdataActivity.this,我的訂單頁面.class);
+            startActivity(intent);
             return true;
         }
         else if(id == R.id.itemmenu){
-            Intent intent=new Intent(memberdataActivity.this,商品菜單頁面.class);
+            Intent intent=new Intent(memberdataActivity.this,MenuList.class);
+            startActivity(intent);
             return true;
         }
         else if(id == R.id.historyorder){
             Intent intent=new Intent(memberdataActivity.this,歷史訂單頁面.class);
+            startActivity(intent);
             return true;
         }
         else if(id == R.id.myfavorite){
-            Intent intent=new Intent(memberdataActivity.this,我的最愛頁面.class);
+            Intent intent=new Intent(memberdataActivity.this,MyFavoriteActivity.class);
+            startActivity(intent);
             return true;
         }
         else if(id == R.id.pointchange){
-            Intent intent=new Intent(memberdataActivity.this,點數兌換頁面.class);
+            Intent intent=new Intent(memberdataActivity.this,PointChangeActivity.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
