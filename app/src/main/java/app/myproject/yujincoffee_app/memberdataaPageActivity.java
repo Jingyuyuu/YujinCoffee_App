@@ -18,7 +18,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
+import app.myproject.yujincoffee_app.Modle.Util.SimpleeAPIWorker;
 import app.myproject.yujincoffee_app.databinding.ActivityMemberdataaPageBinding;
 import app.myproject.yujincoffee_app.databinding.ActivityRegisttPageBinding;
 import okhttp3.MediaType;
@@ -37,13 +39,11 @@ public class memberdataaPageActivity extends AppCompatActivity {
             super.handleMessage(msg);
             Bundle bundle=msg.getData();
             if(bundle.getInt("status")==123){
-                Toast.makeText(memberdataaPageActivity.this, bundle.getString("mesg"), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(memberdataaPageActivity.this, indextPageActivity.class);
-                startActivity(intent);
+                Toast.makeText(memberdataaPageActivity.this, bundle.getString("mesg"), Toast.LENGTH_LONG).show();
+
             }else{
                 Toast.makeText(memberdataaPageActivity.this, bundle.getString("mesg"), Toast.LENGTH_LONG).show();
             }
-
         }
     };
     @Override
@@ -51,10 +51,43 @@ public class memberdataaPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding=ActivityMemberdataaPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        executorService= Executors.newSingleThreadExecutor();
+
+
         binding.memberPointsTX.setText("100");
-        binding.memberEmailTX.setText("wu@gmail.com");
-        binding.memberNameT.setText("吳晶瑜");
-        binding.memberPhoneT.setText("0912345677");
+        binding.memberEmailTX.setText("li@gmail.com");
+        binding.memberNameT.setText("吳鯨魚");
+        binding.memberPhoneT.setText("0912332110");
+
+        JSONObject packet=new JSONObject();
+        try {
+
+            JSONObject newMemberRegData=new JSONObject();
+            newMemberRegData.put("name","吳鯨魚");//binding.memberNameT.getText().toString()
+            newMemberRegData.put("pwd","000");//binding.memberPointsTX.getText().toString()
+            newMemberRegData.put("phone","0912332110");//binding.memberPhoneT.getText().toString()
+            newMemberRegData.put("email","li@gmail.com");//binding.memberEmailTX.getText().toString()
+            packet.put("NewMemberData",newMemberRegData);
+
+            Log.e("JSON",packet.toString(4));
+            Toast.makeText(memberdataaPageActivity.this, "已送出訊息", Toast.LENGTH_SHORT).show();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        MediaType mType=MediaType.parse("application/json");
+        RequestBody body=RequestBody.create(packet.toString(),mType);
+        //VM IP=20.187.101.131
+        Request request=new Request.Builder()
+                .url("http://192.168.255.123:8216/api/member/reNewMemberData")
+                .post(body)
+                .build();
+        SimpleeAPIWorker apiCaller=new SimpleeAPIWorker(request,memberDataHandler);
+        //產生Task準備給executor執行
+        executorService.execute(apiCaller);
+
+
 
         binding.memberReviseBtn.setOnClickListener(new View.OnClickListener() {
                     //傳送修改資料給Server寫入資料庫
@@ -66,10 +99,10 @@ public class memberdataaPageActivity extends AppCompatActivity {
               try {
 
                   JSONObject newMemberRegData=new JSONObject();
-                  newMemberRegData.put("name",binding.memberNameT.getText().toString());
-                  newMemberRegData.put("phone",binding.memberPhoneT.getText().toString());
-                  newMemberRegData.put("pwd",binding.memberPointsTX.getText().toString());
-                  newMemberRegData.put("email",binding.memberEmailTX.getText().toString());
+                  newMemberRegData.put("name","吳鯨魚");//binding.memberNameT.getText().toString()
+                  newMemberRegData.put("pwd","000");//binding.memberPointsTX.getText().toString()
+                  newMemberRegData.put("phone","0912332110");//binding.memberPhoneT.getText().toString()
+                  newMemberRegData.put("email","li@gmail.com");//binding.memberEmailTX.getText().toString()
                   packet.put("NewMemberData",newMemberRegData);
 
                   Log.e("JSON",packet.toString(4));
@@ -82,19 +115,18 @@ public class memberdataaPageActivity extends AppCompatActivity {
               RequestBody body=RequestBody.create(packet.toString(),mType);
               //VM IP=20.187.101.131
                   Request request=new Request.Builder()
-                          .url("http://192.168.43.21:8216/api/member/reNewMemberData")
+                          .url("http://192.168.255.123:8216/api/member/reNewMemberData")
                           .post(body)
                           .build();
-                  memberdataaPageActivity.SimpleAPIWorker apiCaller=new memberdataaPageActivity.SimpleAPIWorker(request);
+                  SimpleeAPIWorker apiCaller=new SimpleeAPIWorker(request,memberDataHandler);
                   //產生Task準備給executor執行
                   executorService.execute(apiCaller);
-
-
             }
         });
 
 
     }
+    /*
     class SimpleAPIWorker implements Runnable{
         OkHttpClient client;
         Request request;
@@ -130,6 +162,8 @@ public class memberdataaPageActivity extends AppCompatActivity {
         }
     }
 
+
+     */
 
 
     @Override

@@ -1,12 +1,10 @@
 package app.myproject.yujincoffee_app;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.StringJoiner;
 
 public class ShoppingCart {
     private static ShoppingCart shoppingCart;
-    ArrayList<Drink> drinkItems;
+    ArrayList<indextPageActivity.Drink> drinkItems;
     private ShoppingCart(){
         drinkItems=new ArrayList();
 

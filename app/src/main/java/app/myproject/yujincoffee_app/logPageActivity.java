@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import app.myproject.yujincoffee_app.Modle.Util.SimpleeAPIWorker;
 import app.myproject.yujincoffee_app.databinding.ActivityLogPageBinding;
 import okhttp3.MediaType;
 import okhttp3.OkHttp;
@@ -87,10 +88,10 @@ public class logPageActivity extends AppCompatActivity {
                 RequestBody body=RequestBody.create(packet.toString(),mType);
                 //VM IP=20.187.101.131
                 Request request=new Request.Builder()
-                        .url("http://192.168.43.21:8216/api/member/login")
+                        .url("http://192.168.255.123:8216/api/member/login")
                         .post(body)
                         .build();
-                SimpleAPIWorker apiCaller=new SimpleAPIWorker(request);
+                SimpleeAPIWorker apiCaller=new SimpleeAPIWorker(request,loginResultHandler);
                 //產生Task準備給executor執行
                 executorService.execute(apiCaller);
 
@@ -142,6 +143,7 @@ public class logPageActivity extends AppCompatActivity {
 //wu@gmail.co
     }
 
+    /*
     class SimpleAPIWorker implements Runnable{
         OkHttpClient client;
         Request request;
@@ -176,5 +178,7 @@ public class logPageActivity extends AppCompatActivity {
 
         }
     }
+
+     */
 
 }
