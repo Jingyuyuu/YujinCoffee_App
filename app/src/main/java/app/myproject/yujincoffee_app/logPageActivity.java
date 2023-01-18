@@ -4,12 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -32,6 +34,10 @@ public class logPageActivity extends AppCompatActivity {
     ActivityLogPageBinding binding;
     ExecutorService executorService;
 
+
+
+
+
     Handler loginResultHandler=new Handler(Looper.getMainLooper()){
         @Override
         public void handleMessage(@NonNull Message msg) {
@@ -53,8 +59,12 @@ public class logPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding=ActivityLogPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         executorService= Executors.newSingleThreadExecutor();
+        if(getSharedPreferences("User",MODE_PRIVATE).getBoolean("check",true)){
+            binding.rememberme.setChecked(true);
+            binding.loginAccTV.setText(getSharedPreferences("User",MODE_PRIVATE).getString("account",null));
+        }
+
 
         binding.logBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,13 +77,14 @@ public class logPageActivity extends AppCompatActivity {
                     memberLogData.put("acc",binding.loginAccTV.getText().toString());
                     memberLogData.put("pwd",binding.loginPwdTV.getText().toString());
                     packet.put("logData",memberLogData);
-
                     Log.e("JSON",packet.toString(4));
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-                MediaType mType=MediaType.parse("application/json");
+
+               MediaType mType=MediaType.parse("application/json");
                 RequestBody body=RequestBody.create(packet.toString(),mType);
                 //VM IP=20.187.101.131
                 Request request=new Request.Builder()
@@ -106,6 +117,28 @@ public class logPageActivity extends AppCompatActivity {
                  */
             }
         });
+
+        binding.rememberme.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                SharedPreferences sharedPreferences =getSharedPreferences("User",MODE_PRIVATE);
+                SharedPreferences.Editor edit=sharedPreferences.edit();
+                if(b){
+
+                    edit.putString("account",binding.loginAccTV.getText().toString()).commit();
+                    edit.putBoolean("check",b).commit();
+                    binding.loginAccTV.setText(sharedPreferences.getString("account",null));
+                }else{
+
+                    edit.remove("account").apply();
+                    edit.remove("check").apply();
+                    edit.putString("account","");
+                    edit.putBoolean("check",false).commit();
+
+                }
+            }
+        });
+
 
 //wu@gmail.co
     }

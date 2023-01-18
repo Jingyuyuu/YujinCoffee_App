@@ -95,4 +95,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginPwdTV"
         app:layout_constraintVertical_bias="0.122" />
+
+    <CheckBox
+        android:id="@+id/rememberme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:text="記住我"
+        app:layout_constraintEnd_toStartOf="@+id/RegBtn"
+        app:layout_constraintTop_toTopOf="@+id/RegBtn" />
 </androidx.constraintlayout.widget.ConstraintLayout>

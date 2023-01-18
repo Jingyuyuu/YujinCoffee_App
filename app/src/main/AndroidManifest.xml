@@ -16,10 +16,10 @@
         android:theme="@style/Theme.YujinCoffee_App"
         tools:targetApi="31">
         <activity
-            android:name=".logouttPageActivity"
+            android:name=".HistoryOrderActivity"
             android:exported="false" />
         <activity
-            android:name=".logOutPageActivity"
+            android:name=".MyOrderActivity"
             android:exported="false" />
         <activity
             android:name=".MenuTestActivity"

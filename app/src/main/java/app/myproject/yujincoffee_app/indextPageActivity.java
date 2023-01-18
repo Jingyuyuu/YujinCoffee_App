@@ -54,21 +54,25 @@ public class indextPageActivity extends AppCompatActivity {
             Intent intent = new Intent(indextPageActivity.this, memberdataaPageActivity.class);
             startActivity(intent);
         }
-        /*
         else if (id == R.id.myorder) {
-            Intent intent = new Intent(indextPageActivity.this, 我的訂單頁面.class);
-            startActivity(intent);
-        } else if (id == R.id.itemmenu) {
-            Intent intent = new Intent(indextPageActivity.this, MenuList.class);
-            startActivity(intent);
-        } else if (id == R.id.historyorder) {
-            Intent intent = new Intent(indextPageActivity.this, 歷史訂單頁面.class);
+            Intent intent = new Intent(indextPageActivity.this, MyOrderActivity.class);
             startActivity(intent);
         }
-        */else if (id == R.id.myfavorite) {
+        /*
+        else if (id == R.id.itemmenu) {
+            Intent intent = new Intent(indextPageActivity.this, MenuList.class);
+            startActivity(intent);
+        }
+         */
+        else if (id == R.id.historyorder) {
+            Intent intent = new Intent(indextPageActivity.this, HistoryOrderActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.myfavorite) {
             Intent intent = new Intent(indextPageActivity.this, MyFavoriteActivity.class);
             startActivity(intent);
-        } else if (id == R.id.pointchange) {
+        }
+        else if (id == R.id.pointchange) {
             Intent intent = new Intent(indextPageActivity.this, PointChangeActivity.class);
             startActivity(intent);
         } else if (id == R.id.logout) {
