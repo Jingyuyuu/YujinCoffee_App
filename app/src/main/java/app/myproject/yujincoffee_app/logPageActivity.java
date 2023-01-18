@@ -11,6 +11,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -31,6 +32,9 @@ import okhttp3.Response;
 public class logPageActivity extends AppCompatActivity {
     ActivityLogPageBinding binding;
     ExecutorService executorService;
+
+
+
 
 
     Handler loginResultHandler=new Handler(Looper.getMainLooper()){
@@ -55,7 +59,11 @@ public class logPageActivity extends AppCompatActivity {
         binding=ActivityLogPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         executorService= Executors.newSingleThreadExecutor();
-        SharedPreferences account=getSharedPreferences("account",MODE_PRIVATE);
+        if(getSharedPreferences("User",MODE_PRIVATE).getBoolean("check",true)){
+            binding.rememberme.setChecked(true);
+            binding.loginAccTV.setText(getSharedPreferences("User",MODE_PRIVATE).getString("account",null));
+        }
+
 
         binding.logBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,11 +77,13 @@ public class logPageActivity extends AppCompatActivity {
                     memberLogData.put("pwd",binding.loginPwdTV.getText().toString());
                     packet.put("logData",memberLogData);
                     Log.e("JSON",packet.toString(4));
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-                MediaType mType=MediaType.parse("application/json");
+
+               MediaType mType=MediaType.parse("application/json");
                 RequestBody body=RequestBody.create(packet.toString(),mType);
                 //VM IP=20.187.101.131
                 Request request=new Request.Builder()
@@ -106,23 +116,28 @@ public class logPageActivity extends AppCompatActivity {
                  */
             }
         });
-       //記住我打勾了
-        binding.rememberme.setOnClickListener(new View.OnClickListener() {
+
+        binding.rememberme.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
-                //SharedPreferences放入帳號密碼
-                SharedPreferences.Editor editor = account.edit();
-                editor.putString("accounts", String.valueOf(binding.loginAccTV));
-                editor.putString("passwords", String.valueOf(binding.loginPwdTV));
-                editor.commit();
-                //下次進入APP時將帳號密碼放入?
-                SharedPreferences account= getSharedPreferences("account", MODE_PRIVATE);
-                String username = account.getString("accounts","");
-                String userpassword=account.getString("passwords","");
-                binding.loginAccTV.setText(username);
-                binding.loginPwdTV.setText(userpassword);
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                SharedPreferences sharedPreferences =getSharedPreferences("User",MODE_PRIVATE);
+                SharedPreferences.Editor edit=sharedPreferences.edit();
+                if(b){
+
+                    edit.putString("account",binding.loginAccTV.getText().toString()).commit();
+                    edit.putBoolean("check",b).commit();
+                    binding.loginAccTV.setText(sharedPreferences.getString("account",null));
+                }else{
+
+                    edit.remove("account").apply();
+                    edit.remove("check").apply();
+                    edit.putString("account","");
+                    edit.putBoolean("check",false).commit();
+
+                }
             }
         });
+
 
 //wu@gmail.co
     }
