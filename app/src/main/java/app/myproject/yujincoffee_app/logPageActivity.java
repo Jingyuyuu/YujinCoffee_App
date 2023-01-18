@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -31,6 +32,7 @@ public class logPageActivity extends AppCompatActivity {
     ActivityLogPageBinding binding;
     ExecutorService executorService;
 
+
     Handler loginResultHandler=new Handler(Looper.getMainLooper()){
         @Override
         public void handleMessage(@NonNull Message msg) {
@@ -52,8 +54,8 @@ public class logPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding=ActivityLogPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         executorService= Executors.newSingleThreadExecutor();
+        SharedPreferences account=getSharedPreferences("account",MODE_PRIVATE);
 
         binding.logBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +68,6 @@ public class logPageActivity extends AppCompatActivity {
                     memberLogData.put("acc",binding.loginAccTV.getText().toString());
                     memberLogData.put("pwd",binding.loginPwdTV.getText().toString());
                     packet.put("logData",memberLogData);
-
                     Log.e("JSON",packet.toString(4));
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -103,6 +104,23 @@ public class logPageActivity extends AppCompatActivity {
                         " "+a.drinkItems.get(0).getSugar()
                 +""+a.drinkItems.get(0).getPrice());
                  */
+            }
+        });
+       //記住我打勾了
+        binding.rememberme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //SharedPreferences放入帳號密碼
+                SharedPreferences.Editor editor = account.edit();
+                editor.putString("accounts", String.valueOf(binding.loginAccTV));
+                editor.putString("passwords", String.valueOf(binding.loginPwdTV));
+                editor.commit();
+                //下次進入APP時將帳號密碼放入?
+                SharedPreferences account= getSharedPreferences("account", MODE_PRIVATE);
+                String username = account.getString("accounts","");
+                String userpassword=account.getString("passwords","");
+                binding.loginAccTV.setText(username);
+                binding.loginPwdTV.setText(userpassword);
             }
         });
 
