@@ -149,23 +149,23 @@ public class memberdataaPageActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         }
-        /*
         else if(id == R.id.myorder){
-            Intent intent=new Intent(memberdataaPageActivity.this,我的訂單頁面.class);
+            Intent intent=new Intent(memberdataaPageActivity.this,MyOrderActivity.class);
             startActivity(intent);
             return true;
         }
+        /*
         else if(id == R.id.itemmenu){
             Intent intent=new Intent(memberdataaPageActivity.this,MenuList.class);
             startActivity(intent);
             return true;
         }
+         */
         else if(id == R.id.historyorder){
-            Intent intent=new Intent(memberdataaPageActivity.this,歷史訂單頁面.class);
+            Intent intent=new Intent(memberdataaPageActivity.this,HistoryOrderActivity.class);
             startActivity(intent);
             return true;
         }
-        */
         else if(id == R.id.myfavorite){
             Intent intent=new Intent(memberdataaPageActivity.this,MyFavoriteActivity.class);
             startActivity(intent);

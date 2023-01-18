@@ -17,5 +17,7 @@ public class storelistActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding=ActivityStorelistBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+
     }
 }
