@@ -30,8 +30,11 @@ public class SimpleeAPIWorker implements Runnable{
             //Response也應該是JASON格式回傳 由APP端確認登入結果
 
             JSONObject result=new JSONObject(responseString);
+
+
             Message m=handler.obtainMessage();
             Bundle bundle=new Bundle();
+
             if(result.getInt("status")==000){
                 bundle.putString("mesg",result.getString("mesg"));
                 bundle.putInt("status",result.getInt("status"));
@@ -49,8 +52,20 @@ public class SimpleeAPIWorker implements Runnable{
             }else if(result.getInt("status")==123){
                 bundle.putString("mesg",result.getString("mesg"));
                 bundle.putInt("status",result.getInt("status"));
+
+            }else if(result.getInt("status")==456){
+                bundle.putString("mesg",result.getString("mesg"));
+                bundle.putInt("status",result.getInt("status"));
+
+            }else if(result.getInt("status")==999){
+                bundle.putString("email",result.getJSONObject("data").getString("email"));
+                bundle.putString("name",result.getJSONObject("data").getString("name"));
+                bundle.putString("points",result.getJSONObject("data").getString("points"));
+                bundle.putString("phone",result.getJSONObject("data").getString("phone"));
+                bundle.putInt("status",result.getInt("status"));
+                Log.e("999",bundle.getString("email"));
             }else{
-                bundle.putString("mesg","會員更新失敗，請洽程式開發人員");
+                bundle.putString("mesg","系統錯誤，請洽程式開發人員");
                 bundle.putInt("status",result.getInt("status"));
             }
 

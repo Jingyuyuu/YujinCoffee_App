@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import app.myproject.yujincoffee_app.databinding.ActivityIndextPageBinding;
+import app.myproject.yujincoffee_app.databinding.ActivityLogPageBinding;
 
 public class indextPageActivity extends AppCompatActivity {
 
@@ -70,6 +71,9 @@ public class indextPageActivity extends AppCompatActivity {
         } else if (id == R.id.pointchange) {
             Intent intent = new Intent(indextPageActivity.this, PointChangeActivity.class);
             startActivity(intent);
+        } else if (id == R.id.logout) {
+            Intent intent = new Intent(indextPageActivity.this, logouttPageActivity.class);
+            startActivity(intent);
         }
         return true;
     }
@@ -121,4 +125,6 @@ public class indextPageActivity extends AppCompatActivity {
             }
 
     }
+
+
 }

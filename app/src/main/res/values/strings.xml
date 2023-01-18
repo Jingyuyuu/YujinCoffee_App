@@ -6,6 +6,7 @@
     <string name="yj_pwd">密碼：</string>
     <string name="yj_m_nameTittle">會員姓名：</string>
     <string name="yj_m_pwdTittle">會員密碼：</string>
+    <string name="yj_m_reNewPwdTittle">修改會員密碼：</string>
     <string name="yj_m_pwd2Tittle">會員密碼確認：</string>
     <string name="yj_m_pointTittle">會員點數：</string>
     <string name="yj_m_emailTittle">會員信箱(帳號)：</string>
