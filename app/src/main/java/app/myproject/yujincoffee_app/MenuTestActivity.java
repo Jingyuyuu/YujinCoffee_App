@@ -13,7 +13,7 @@ public class MenuTestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu_test);
 
         ShoppingCart a= ShoppingCart.newInstance();
-        Drink coffee = new Drink("奶茶","123","冰","0.5");
+        indextPageActivity.Drink coffee = new indextPageActivity.Drink("奶茶","123","冰","0.5");
         a.drinkItems.add(coffee);
         Log.e("購物車",a.drinkItems.get(0).getName()
                 +" "+a.drinkItems.get(0).getIce()

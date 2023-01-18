@@ -18,6 +18,7 @@ import org.json.JSONObject;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import app.myproject.yujincoffee_app.Modle.Util.SimpleeAPIWorker;
 import app.myproject.yujincoffee_app.databinding.ActivityRegisttPageBinding;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -27,7 +28,8 @@ import okhttp3.Response;
 
 public class registtPageActivity extends AppCompatActivity {
     ActivityRegisttPageBinding binding;
-    ExecutorService executorService;
+    ExecutorService executorService=Executors.newSingleThreadExecutor();
+
 
     Handler registerResultHandler =new Handler(Looper.getMainLooper()){
         @Override
@@ -90,7 +92,7 @@ public class registtPageActivity extends AppCompatActivity {
                         .url("http://192.168.255.123:8216/api/member/register")
                         .post(body)
                         .build();
-                registtPageActivity.SimpleAPIWorker apiCaller=new registtPageActivity.SimpleAPIWorker(request);
+                SimpleeAPIWorker apiCaller=new SimpleeAPIWorker(request,registerResultHandler);
                 //產生Task準備給executor執行
                 executorService.execute(apiCaller);
 
@@ -100,7 +102,7 @@ public class registtPageActivity extends AppCompatActivity {
 
     }
 
-
+    /*
     class SimpleAPIWorker implements Runnable{
         OkHttpClient client;
         Request request;
@@ -135,4 +137,5 @@ public class registtPageActivity extends AppCompatActivity {
 
         }
     }
+     */
 }
