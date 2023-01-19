@@ -1,10 +1,10 @@
 package app.myproject.yujincoffee_app;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -31,58 +31,63 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class memberdataaPageActivity extends AppCompatActivity {
-    SharedPreferences memberDataSharePre;
     ActivityMemberdataaPageBinding binding;
     ExecutorService executorService;
 
+    Handler memberDataHandler =new Handler(Looper.getMainLooper()){
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            Bundle bundle=msg.getData();
+            if(bundle.getInt("status")==123){
+                Toast.makeText(memberdataaPageActivity.this, bundle.getString("mesg"), Toast.LENGTH_LONG).show();
+
+            }else{
+                Toast.makeText(memberdataaPageActivity.this, bundle.getString("mesg"), Toast.LENGTH_LONG).show();
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding=ActivityMemberdataaPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        memberDataSharePre = getSharedPreferences("memberDataPre", MODE_PRIVATE);
-        //getSharedPreferences只是建立檔名 可以放在最前面get出來讓大家用
-        String memberDataCheck=memberDataSharePre.getString("name","查無資料");
-        if(memberDataCheck.equals("查無資料")) {
-            //如果SharedPreferance裡面的memberDataPre檔案裡的name沒有資料，就從網路下載會員資料
-            executorService = Executors.newSingleThreadExecutor();
-            JSONObject packet = new JSONObject();
-            try {
-                JSONObject memberEmail = new JSONObject();
-                memberEmail.put("email", "wu@gmail.com");
-                packet.put("memberEmail", memberEmail);
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        executorService= Executors.newSingleThreadExecutor();
 
-                Log.e("JSON", "這裡是從網路下載的會員資料");
-                Toast.makeText(memberdataaPageActivity.this, "已送出EMAIL抓取會員資料", Toast.LENGTH_SHORT).show();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
 
-            MediaType mType = MediaType.parse("application/json");
-            RequestBody body = RequestBody.create(packet.toString(), mType);
-            //VM IP=20.187.101.131
-            Request request = new Request.Builder()
-                    .url("http://192.168.255.123:8216/api/member/getMemberData")
-                    .post(body)
-                    .build();
-            SimpleeAPIWorker apiCaller = new SimpleeAPIWorker(request, memberDataHandler);
-            //產生Task準備給executor執行
-            executorService.execute(apiCaller);
+        binding.memberPointsTX.setText("100");
+        binding.memberEmailTX.setText("li@gmail.com");
+        binding.memberNameT.setText("吳鯨魚");
+        binding.memberPhoneT.setText("0912332110");
 
-        }else{
-            String PointsData=memberDataSharePre.getString("points","查無資料");
-            String nameData=memberDataSharePre.getString("name","查無資料");
-            String emailData=memberDataSharePre.getString("email","查無資料");
-            String phoneData=memberDataSharePre.getString("phone","查無資料");
+        JSONObject packet=new JSONObject();
+        try {
 
-            binding.memberPointsTX.setText(PointsData);
-            binding.memberNameT.setText(nameData);
-            binding.memberEmailTX.setText(emailData);
-            binding.memberPhoneT.setText(phoneData);
-            Log.e("JSON", "這裡是從SharePreferance取出的會員資料");
+            JSONObject newMemberRegData=new JSONObject();
+            newMemberRegData.put("name","吳鯨魚");//binding.memberNameT.getText().toString()
+            newMemberRegData.put("pwd","000");//binding.memberPointsTX.getText().toString()
+            newMemberRegData.put("phone","0912332110");//binding.memberPhoneT.getText().toString()
+            newMemberRegData.put("email","li@gmail.com");//binding.memberEmailTX.getText().toString()
+            packet.put("NewMemberData",newMemberRegData);
+
+            Log.e("JSON",packet.toString(4));
+            Toast.makeText(memberdataaPageActivity.this, "已送出訊息", Toast.LENGTH_SHORT).show();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
-
+        MediaType mType=MediaType.parse("application/json");
+        RequestBody body=RequestBody.create(packet.toString(),mType);
+        //VM IP=20.187.101.131
+        Request request=new Request.Builder()
+                .url("http://192.168.255.123:8216/api/member/reNewMemberData")
+                .post(body)
+                .build();
+        SimpleeAPIWorker apiCaller=new SimpleeAPIWorker(request,memberDataHandler);
+        //產生Task準備給executor執行
+        executorService.execute(apiCaller);
 
 
 
@@ -124,37 +129,6 @@ public class memberdataaPageActivity extends AppCompatActivity {
 
     }
 
-    Handler memberDataHandler =new Handler(Looper.getMainLooper()){
-        @Override
-        public void handleMessage(@NonNull Message msg) {
-            super.handleMessage(msg);
-            Bundle bundle=msg.getData();
-            if(bundle.getInt("status")==123){
-                Toast.makeText(memberdataaPageActivity.this, bundle.getString("mesg"), Toast.LENGTH_LONG).show();
-            }else if(bundle.getInt("status")==465) {
-                Toast.makeText(memberdataaPageActivity.this, bundle.getString("mesg"), Toast.LENGTH_LONG).show();
-            }else if(bundle.getInt("status")==999) {
-                Toast.makeText(memberdataaPageActivity.this, bundle.getString("email"), Toast.LENGTH_LONG).show();
-                binding.memberPointsTX.setText(bundle.getString("points"));
-                binding.memberNameT.setText(bundle.getString("name"));
-                binding.memberEmailTX.setText(bundle.getString("email"));
-                binding.memberPhoneT.setText(bundle.getString("phone"));
-
-
-                SharedPreferences.Editor editor=memberDataSharePre.edit();
-                editor.putString("points",binding.memberPointsTX.getText().toString());
-                editor.putString("name",binding.memberNameT.getText().toString());
-                editor.putString("email",binding.memberEmailTX.getText().toString());
-                editor.putString("phone",binding.memberPhoneT.getText().toString());
-                editor.apply();
-            }else{
-                Toast.makeText(memberdataaPageActivity.this, bundle.getString("mesg"), Toast.LENGTH_LONG).show();
-            }
-
-
-
-        }
-    };
     /*
     class SimpleAPIWorker implements Runnable{
         OkHttpClient client;
@@ -210,34 +184,32 @@ public class memberdataaPageActivity extends AppCompatActivity {
         if(id == R.id.membersetting){
             Intent intent=new Intent(memberdataaPageActivity.this,memberdataaPageActivity.class);
             startActivity(intent);
-            return true;
         }
         else if(id == R.id.myorder){
             Intent intent=new Intent(memberdataaPageActivity.this,MyOrderActivity.class);
             startActivity(intent);
-            return true;
         }
         /*
         else if(id == R.id.itemmenu){
             Intent intent=new Intent(memberdataaPageActivity.this,MenuList.class);
             startActivity(intent);
-            return true;
         }
          */
         else if(id == R.id.historyorder){
             Intent intent=new Intent(memberdataaPageActivity.this,HistoryOrderActivity.class);
             startActivity(intent);
-            return true;
         }
         else if(id == R.id.myfavorite){
             Intent intent=new Intent(memberdataaPageActivity.this,MyFavoriteActivity.class);
             startActivity(intent);
-            return true;
         }
         else if(id == R.id.pointchange){
             Intent intent=new Intent(memberdataaPageActivity.this,PointChangeActivity.class);
             startActivity(intent);
-            return true;
+        }
+        else if(id ==android.R.id.home){
+            //返回鍵動作
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }

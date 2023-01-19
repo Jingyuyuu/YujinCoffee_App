@@ -1,8 +1,11 @@
 package app.myproject.yujincoffee_app;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
@@ -17,7 +20,16 @@ public class storelistActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding=ActivityStorelistBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        //返回鍵
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
-
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

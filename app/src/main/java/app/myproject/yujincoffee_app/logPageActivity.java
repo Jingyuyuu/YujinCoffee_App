@@ -1,6 +1,7 @@
 package app.myproject.yujincoffee_app;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
@@ -33,12 +35,7 @@ import okhttp3.Response;
 public class logPageActivity extends AppCompatActivity {
     ActivityLogPageBinding binding;
     ExecutorService executorService;
-
-
-
-
-
-    Handler loginResultHandler=new Handler(Looper.getMainLooper()){
+   Handler loginResultHandler=new Handler(Looper.getMainLooper()){
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
@@ -54,6 +51,7 @@ public class logPageActivity extends AppCompatActivity {
 
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

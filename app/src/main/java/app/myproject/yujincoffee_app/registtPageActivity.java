@@ -1,6 +1,7 @@
 package app.myproject.yujincoffee_app;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -51,6 +53,9 @@ public class registtPageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //返回鍵
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         super.onCreate(savedInstanceState);
         binding=ActivityRegisttPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -101,7 +106,13 @@ public class registtPageActivity extends AppCompatActivity {
         });
 
     }
-
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
     /*
     class SimpleAPIWorker implements Runnable{
         OkHttpClient client;
