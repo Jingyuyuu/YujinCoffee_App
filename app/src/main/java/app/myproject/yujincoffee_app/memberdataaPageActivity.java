@@ -106,7 +106,7 @@ public class memberdataaPageActivity extends AppCompatActivity {
             }else if(bundle.getInt("status")==465) {
                 Toast.makeText(memberdataaPageActivity.this, bundle.getString("mesg"), Toast.LENGTH_LONG).show();
             }else if(bundle.getInt("status")==999) {
-                Toast.makeText(memberdataaPageActivity.this, bundle.getString("email"), Toast.LENGTH_LONG).show();
+                //Toast.makeText(memberdataaPageActivity.this, bundle.getString("email"), Toast.LENGTH_LONG).show();
                 binding.memberPointsTX.setText(bundle.getString("points"));
                 binding.memberNameTT.setText(bundle.getString("name"));
                 binding.memberEmailTX.setText(bundle.getString("email"));

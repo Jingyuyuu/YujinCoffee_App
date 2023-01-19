@@ -118,4 +118,16 @@
         app:layout_constraintTop_toBottomOf="@+id/textView14"
         app:layout_constraintVertical_bias="0.399" />
 
+    <Button
+        android:id="@+id/toChangeMemberDataPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="修改我的會員資料"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.826"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/memberPhoneTT"
+        app:layout_constraintVertical_bias="0.487" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
