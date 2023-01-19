@@ -2,9 +2,12 @@ package app.myproject.yujincoffee_app;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -33,6 +36,7 @@ import okhttp3.Response;
 public class memberdataaPageActivity extends AppCompatActivity {
     ActivityMemberdataaPageBinding binding;
     ExecutorService executorService;
+    SharedPreferences memberDataPre;
 
     Handler memberDataHandler =new Handler(Looper.getMainLooper()){
         @Override
@@ -203,9 +207,39 @@ public class memberdataaPageActivity extends AppCompatActivity {
             Intent intent=new Intent(memberdataaPageActivity.this,MyFavoriteActivity.class);
             startActivity(intent);
         }
+        else if(id == R.id.storelists){
+            Intent intent=new Intent(memberdataaPageActivity.this,storelistActivity.class);
+            startActivity(intent);
+        }
         else if(id == R.id.pointchange){
             Intent intent=new Intent(memberdataaPageActivity.this,PointChangeActivity.class);
             startActivity(intent);
+        }
+        else if(id == R.id.logout){
+
+            AlertDialog.Builder logoutbtn = new AlertDialog.Builder(memberdataaPageActivity.this);
+            logoutbtn.setTitle("登出");
+            logoutbtn.setMessage("確定要登出嗎?");
+            logoutbtn.setNegativeButton("是", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    memberDataPre= getSharedPreferences("memberDataPre", MODE_PRIVATE);
+                    SharedPreferences.Editor editor=memberDataPre.edit();
+                    editor.remove("name");
+                    editor.remove("points");
+                    editor.remove("phone");
+                    editor.remove("email");
+                    editor.apply();
+                }
+            });
+            logoutbtn.setPositiveButton("否", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+            AlertDialog dialog = logoutbtn.create();
+            dialog.show();
         }
         else if(id ==android.R.id.home){
             //返回鍵動作

@@ -28,6 +28,11 @@
         app:showAsAction="never"
         />
     <item
+        android:id="@+id/storelists"
+        android:title="店鋪列表"
+        app:showAsAction="never"
+        />
+    <item
         android:id="@+id/pointchange"
         android:title="點數兌換"
         app:showAsAction="never"
