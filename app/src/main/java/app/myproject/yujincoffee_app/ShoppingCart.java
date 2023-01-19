@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ShoppingCart {
     private static ShoppingCart shoppingCart;
-    ArrayList<indextPageActivity.Drink> drinkItems;
+    ArrayList<Drink> drinkItems;
     private ShoppingCart(){
         drinkItems=new ArrayList();
 
