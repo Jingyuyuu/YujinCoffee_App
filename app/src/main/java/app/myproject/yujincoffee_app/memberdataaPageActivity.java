@@ -87,8 +87,13 @@ public class memberdataaPageActivity extends AppCompatActivity {
             binding.memberPhoneTT.setText(phoneData);
             Log.e("JSON", "這裡是從SharePreferance取出的會員資料");
         }
-
-
+        binding.toChangeMemberDataPageBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(memberdataaPageActivity.this,MemberDataChangeActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
     }

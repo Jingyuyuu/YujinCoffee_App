@@ -33,16 +33,7 @@ public class MemberDataChangeActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
 
-    Handler memberChangeHandler=new Handler(Looper.getMainLooper()){
-        @Override
-        public void handleMessage(@NonNull Message msg) {
-            super.handleMessage(msg);
-            Bundle bundle=msg.getData();
-            if(bundle.getInt("status")==123){
-                Toast.makeText(MemberDataChangeActivity.this, bundle.getString("mesg"), Toast.LENGTH_LONG).show();
-            }
-        }
-    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,72 +84,24 @@ public class MemberDataChangeActivity extends AppCompatActivity {
                     SimpleeAPIWorker apiCaller=new SimpleeAPIWorker(request,memberChangeHandler);
                     //產生Task準備給executor執行
                     executorService.execute(apiCaller);
+
                 }else{
                     Toast.makeText(MemberDataChangeActivity.this, "請確認輸入相同密碼,且欄位不可空白", Toast.LENGTH_LONG).show();
                 }
             }
         });
-        /*
-        //傳送修改後的資料給Server寫入資料庫
-        binding.memberReviseBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //密碼確認正確才會送出修改資料的請求給Server
-                String pwd=binding.memberPWDTV.getText().toString();
-                String pwd2=binding.memberPWDTV2.getText().toString();
-                if(pwd != null && pwd2 !=null && pwd.equals(pwd2)){
-                    //請將使用者資料 封裝成JSON格式 回傳給SpringBoot Controller進行驗證
-                    JSONObject packet=new JSONObject();
-                    try {
-                        JSONObject newMemberRegData=new JSONObject();
-                        newMemberRegData.put("name",binding.memberNameT.getText().toString());
-                        newMemberRegData.put("pwd",binding.memberPWDTV.getText().toString());
-                        newMemberRegData.put("phone",binding.memberPhoneT.getText().toString());
-                        newMemberRegData.put("email",binding.memberEmailTX.getText().toString());
-                        packet.put("NewMemberData",newMemberRegData);
-                        Log.e("JSON",packet.toString(4));
-                        Toast.makeText(memberdataaPageActivity.this, "已送出修改的會員資料", Toast.LENGTH_SHORT).show();
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    MediaType mType=MediaType.parse("application/json");
-                    RequestBody body=RequestBody.create(packet.toString(),mType);
-                    //VM IP=20.187.101.131
-
-                    Request request=new Request.Builder()
-                            .url("http://192.168.255.123:8216/api/member/reNewMemberData")
-                            .post(body)
-                            .build();
-                    SimpleeAPIWorker apiCaller=new SimpleeAPIWorker(request,memberDataHandler);
-                    //產生Task準備給executor執行
-                    executorService.execute(apiCaller);
-                }else {
-                    Toast.makeText(memberdataaPageActivity.this, "密碼確認錯誤，請輸入相同密碼", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        //Spinner
-        String [] items =  { "現金付款", "信用卡" , "LINE PAY" };
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1,
-                items);
-        binding.presetStoreSpinner.setAdapter(adapter);
-        binding.presetStoreSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(memberdataaPageActivity.this, "選取項目" + items[position], Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-         */
     }
+    Handler memberChangeHandler=new Handler(Looper.getMainLooper()){
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            Bundle bundle=msg.getData();
+            if(bundle.getInt("status")==123){
+                Toast.makeText(MemberDataChangeActivity.this, bundle.getString("mesg"), Toast.LENGTH_LONG).show();
+                Intent intent=new Intent(MemberDataChangeActivity.this,memberdataaPageActivity.class);
+                startActivity(intent);
+            }
+        }
+    };
 }

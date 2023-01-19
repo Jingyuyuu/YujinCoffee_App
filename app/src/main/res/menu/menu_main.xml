@@ -37,9 +37,5 @@
         android:title="登出"
         app:showAsAction="never"
         />
-    <item
-        android:id="@+id/memberDataChange"
-        android:title="修改會員資料"
-        app:showAsAction="never"
-        />
+
 </menu>

@@ -119,7 +119,7 @@
         app:layout_constraintVertical_bias="0.399" />
 
     <Button
-        android:id="@+id/toChangeMemberDataPage"
+        android:id="@+id/toChangeMemberDataPageBTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="修改我的會員資料"

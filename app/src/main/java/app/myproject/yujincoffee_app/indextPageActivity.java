@@ -84,10 +84,6 @@ public class indextPageActivity extends AppCompatActivity {
             Intent intent = new Intent(indextPageActivity.this, logouttPageActivity.class);
             startActivity(intent);
 
-        }else if (id == R.id.memberDataChange) {
-            Intent intent = new Intent(indextPageActivity.this,MemberDataChangeActivity.class);
-            startActivity(intent);
-
         }
 
         return true;
