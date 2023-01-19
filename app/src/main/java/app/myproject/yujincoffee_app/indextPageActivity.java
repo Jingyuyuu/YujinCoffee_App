@@ -1,9 +1,12 @@
 package app.myproject.yujincoffee_app;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.os.Bundle;
@@ -15,6 +18,7 @@ import app.myproject.yujincoffee_app.databinding.ActivityLogPageBinding;
 public class indextPageActivity extends AppCompatActivity {
 
     ActivityIndextPageBinding binding;
+    SharedPreferences memberDataPre;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,9 +85,29 @@ public class indextPageActivity extends AppCompatActivity {
             startActivity(intent);
 
         }else if (id == R.id.logout) {
-            Intent intent = new Intent(indextPageActivity.this, logouttPageActivity.class);
-            startActivity(intent);
+            AlertDialog.Builder logoutbtn = new AlertDialog.Builder(indextPageActivity.this);
+            logoutbtn.setTitle("登出");
+            logoutbtn.setMessage("確定要登出嗎?");
+            logoutbtn.setNegativeButton("是", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    memberDataPre= getSharedPreferences("memberDataPre", MODE_PRIVATE);
+                    SharedPreferences.Editor editor=memberDataPre.edit();
+                    editor.remove("name");
+                    editor.remove("points");
+                    editor.remove("phone");
+                    editor.remove("email");
+                    editor.apply();
+                }
+            });
+            logoutbtn.setPositiveButton("否", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
 
+                }
+            });
+            AlertDialog dialog = logoutbtn.create();
+            dialog.show();
         }
 
         return true;
