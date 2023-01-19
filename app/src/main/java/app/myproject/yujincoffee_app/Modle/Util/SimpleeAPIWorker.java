@@ -42,14 +42,14 @@ public class SimpleeAPIWorker implements Runnable{
                 bundle.putString("mesg","email已經存在");
                 bundle.putInt("status",result.getInt("status"));
 
-            }else if(result.getInt("status")==666){
+            }else if(result.getInt("status")==666){//確認登入狀態
                 bundle.putString("mesg",result.getString("mesg"));
                 bundle.putInt("status",result.getInt("status"));
             }else if(result.getInt("status")==444){
                 bundle.putString("mesg","登入失敗 請確認帳號及密碼是否正確");
                 bundle.putInt("status",result.getInt("status"));
 
-            }else if(result.getInt("status")==123){
+            }else if(result.getInt("status")==123){//確認修改會員資料狀態
                 bundle.putString("mesg",result.getString("mesg"));
                 bundle.putInt("status",result.getInt("status"));
 
@@ -57,7 +57,7 @@ public class SimpleeAPIWorker implements Runnable{
                 bundle.putString("mesg",result.getString("mesg"));
                 bundle.putInt("status",result.getInt("status"));
 
-            }else if(result.getInt("status")==999){
+            }else if(result.getInt("status")==999){//確認抓取會員資料狀態
                 bundle.putString("email",result.getJSONObject("data").getString("email"));
                 bundle.putString("name",result.getJSONObject("data").getString("name"));
                 bundle.putString("points",result.getJSONObject("data").getString("points"));

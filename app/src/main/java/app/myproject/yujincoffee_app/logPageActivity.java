@@ -1,7 +1,6 @@
 package app.myproject.yujincoffee_app;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,7 +10,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
@@ -35,35 +33,50 @@ import okhttp3.Response;
 public class logPageActivity extends AppCompatActivity {
     ActivityLogPageBinding binding;
     ExecutorService executorService;
-   Handler loginResultHandler=new Handler(Looper.getMainLooper()){
+
+    SharedPreferences sharedPreferences;
+    Handler loginResultHandler=new Handler(Looper.getMainLooper()){
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
             Bundle bundle=msg.getData();
             if(bundle.getInt("status")==666){
                 Toast.makeText(logPageActivity.this, "歡迎回來", Toast.LENGTH_SHORT).show();
+
+                sharedPreferences =getSharedPreferences("memberDataPre",MODE_PRIVATE);
+                SharedPreferences.Editor edit=sharedPreferences.edit();
+                String savedEmail=sharedPreferences.getString("email","查無資料");
+                String loginEmail=binding.loginAccTV.getText().toString();
+                if(savedEmail.equals(loginEmail)) {
+                    edit.putString("email", loginEmail).commit();//存入登入帳號到memberDataPre檔案
+                }else{
+                    edit.remove("email");
+                    edit.remove("name");
+                    edit.remove("points");
+                    edit.remove("phone");
+                    edit.apply();
+                    edit.putString("email",loginEmail).commit();
+                }
                 Intent intent = new Intent(logPageActivity.this, indextPageActivity.class);
                 startActivity(intent);
             }else{
                 Toast.makeText(logPageActivity.this, bundle.getString("mesg"), Toast.LENGTH_LONG).show();
             }
-
-
         }
     };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding=ActivityLogPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        sharedPreferences =getSharedPreferences("User",MODE_PRIVATE);
+
         executorService= Executors.newSingleThreadExecutor();
         if(getSharedPreferences("User",MODE_PRIVATE).getBoolean("check",true)){
             binding.rememberme.setChecked(true);
             binding.loginAccTV.setText(getSharedPreferences("User",MODE_PRIVATE).getString("account",null));
         }
-
-
         binding.logBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,8 +93,6 @@ public class logPageActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
                MediaType mType=MediaType.parse("application/json");
                 RequestBody body=RequestBody.create(packet.toString(),mType);
                 //VM IP=20.187.101.131
@@ -119,7 +130,7 @@ public class logPageActivity extends AppCompatActivity {
         binding.rememberme.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                SharedPreferences sharedPreferences =getSharedPreferences("User",MODE_PRIVATE);
+                //SharedPreferences sharedPreferences =getSharedPreferences("User",MODE_PRIVATE);
                 SharedPreferences.Editor edit=sharedPreferences.edit();
                 if(b){
 
