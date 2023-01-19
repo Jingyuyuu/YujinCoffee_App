@@ -29,4 +29,15 @@
         app:layout_constraintVertical_bias="0.375"
         app:srcCompat="@drawable/yujin_png" />
 
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:gravity="center_horizontal"
+        android:text="點擊圖示開始使用"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sloganTV" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
