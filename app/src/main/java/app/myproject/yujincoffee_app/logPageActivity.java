@@ -34,35 +34,7 @@ public class logPageActivity extends AppCompatActivity {
     ActivityLogPageBinding binding;
     ExecutorService executorService;
     SharedPreferences sharedPreferences;
-    Handler loginResultHandler=new Handler(Looper.getMainLooper()){
-        @Override
-        public void handleMessage(@NonNull Message msg) {
-            super.handleMessage(msg);
-            Bundle bundle=msg.getData();
-            if(bundle.getInt("status")==666){
-                Toast.makeText(logPageActivity.this, "歡迎回來", Toast.LENGTH_SHORT).show();
 
-                sharedPreferences =getSharedPreferences("memberDataPre",MODE_PRIVATE);
-                SharedPreferences.Editor edit=sharedPreferences.edit();
-                String savedEmail=sharedPreferences.getString("email","查無資料");
-                String loginEmail=binding.loginAccTV.getText().toString();
-                if(savedEmail.equals(loginEmail)) {
-                    edit.putString("email", loginEmail).commit();//存入登入帳號到memberDataPre檔案
-                }else{
-                    edit.remove("email");
-                    edit.remove("name");
-                    edit.remove("points");
-                    edit.remove("phone");
-                    edit.apply();
-                    edit.putString("email",loginEmail).commit();
-                }
-                Intent intent = new Intent(logPageActivity.this, indextPageActivity.class);
-                startActivity(intent);
-            }else{
-                Toast.makeText(logPageActivity.this, bundle.getString("mesg"), Toast.LENGTH_LONG).show();
-            }
-        }
-    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +54,7 @@ public class logPageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String name=binding.loginAccTV.getText().toString();
                 String pwd=binding.loginPwdTV.getText().toString();
+                //判斷欄位不可空白才送出登入資料
                 if(name!=null && pwd!=null && !name.isEmpty() && !pwd.isEmpty()){
                     JSONObject packet=new JSONObject();
                     try {
@@ -105,6 +78,7 @@ public class logPageActivity extends AppCompatActivity {
                     SimpleeAPIWorker apiCaller=new SimpleeAPIWorker(request,loginResultHandler);
                     //產生Task準備給executor執行
                     executorService.execute(apiCaller);
+
                 }else{
                     Toast.makeText(logPageActivity.this, "欄位空白", Toast.LENGTH_SHORT).show();
                 }
@@ -151,5 +125,36 @@ public class logPageActivity extends AppCompatActivity {
         });
 
     }
+
+    Handler loginResultHandler=new Handler(Looper.getMainLooper()){
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            Bundle bundle=msg.getData();
+            if(bundle.getInt("status")==666){
+                Toast.makeText(logPageActivity.this, "歡迎回來", Toast.LENGTH_SHORT).show();
+                //接收後端回傳登入成功的訊息後 將Email存起來 供會員資料頁面使用
+                sharedPreferences =getSharedPreferences("memberDataPre",MODE_PRIVATE);
+                SharedPreferences.Editor edit=sharedPreferences.edit();
+                String savedEmail=sharedPreferences.getString("email","查無資料");
+                String loginEmail=binding.loginAccTV.getText().toString();
+                //確認登入成功的帳號與儲存在手機內的會員為同一人 不同則移除儲存的會員資料
+                if(savedEmail.equals(loginEmail)) {
+                    edit.putString("email", loginEmail).commit();//存入登入帳號到memberDataPre檔案
+                }else{
+                    edit.remove("email");
+                    edit.remove("name");
+                    edit.remove("points");
+                    edit.remove("phone");
+                    edit.apply();
+                    edit.putString("email",loginEmail).commit();
+                }
+                Intent intent = new Intent(logPageActivity.this, indextPageActivity.class);
+                startActivity(intent);
+            }else{
+                Toast.makeText(logPageActivity.this, bundle.getString("mesg"), Toast.LENGTH_LONG).show();
+            }
+        }
+    };
 
 }

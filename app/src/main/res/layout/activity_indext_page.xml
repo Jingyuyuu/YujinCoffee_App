@@ -18,7 +18,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/yujinmain" />
 
-    <ImageButton
+    <ImageView
+        android:id="@+id/memQRcode"
+        android:layout_width="350sp"
+        android:layout_height="125dp"
+        android:layout_marginTop="20dp"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView7"
+        app:srcCompat="@drawable/ind003t"/>
+
+    <ImageView
         android:id="@+id/menubtn"
         android:layout_width="350dp"
         android:layout_height="125dp"
@@ -26,20 +37,9 @@
         app:layout_constraintBottom_toTopOf="@+id/seasonnew"
         app:layout_constraintStart_toStartOf="@+id/memQRcode"
         app:layout_constraintTop_toBottomOf="@+id/memQRcode"
-        app:srcCompat="@drawable/menupic" />
+        app:srcCompat="@drawable/ind003t"/>
 
-    <ImageButton
-        android:id="@+id/memQRcode"
-        android:layout_width="350dp"
-        android:layout_height="125dp"
-        android:layout_marginTop="20dp"
-        android:scaleType="centerInside"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView7"
-        tools:srcCompat="@drawable/yujin_png" />
-
-    <ImageButton
+    <ImageView
         android:id="@+id/seasonnew"
         android:layout_width="350dp"
         android:layout_height="125dp"
@@ -47,7 +47,6 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="@+id/memQRcode"
         app:layout_constraintTop_toBottomOf="@+id/menubtn"
-        app:srcCompat="@drawable/yujin_png"
-        tools:srcCompat="@drawable/newpic2" />
+        app:srcCompat="@drawable/ind003t"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
