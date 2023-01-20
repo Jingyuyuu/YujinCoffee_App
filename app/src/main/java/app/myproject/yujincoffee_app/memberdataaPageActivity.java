@@ -67,7 +67,7 @@ public class memberdataaPageActivity extends AppCompatActivity {
             RequestBody body = RequestBody.create(packet.toString(), mType);
             //VM IP=20.187.101.131
             Request request = new Request.Builder()
-                    .url("http://192.168.255.123:8216/api/member/getMemberData")
+                    .url("http://192.168.43.21:8216/api/member/getMemberData")
                     .post(body)
                     .build();
             SimpleeAPIWorker apiCaller = new SimpleeAPIWorker(request, memberDataHandler);

@@ -101,6 +101,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
+        android:checked="false"
         android:text="記住我"
         app:layout_constraintEnd_toStartOf="@+id/RegBtn"
         app:layout_constraintTop_toTopOf="@+id/RegBtn" />

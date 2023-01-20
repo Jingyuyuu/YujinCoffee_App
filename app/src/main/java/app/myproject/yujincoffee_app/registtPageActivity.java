@@ -74,37 +74,43 @@ public class registtPageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //請將使用者資料 封裝成JSON格式 回傳給SpringBoot Controller進行驗證
                 //下拉選單範例https://github.com/miscoder002/ReivewApphttps://github.com/miscoder002/ReivewApp
-                JSONObject packet=new JSONObject();
-                try {
+                String name=binding.regName.getText().toString();
+                String pwd=binding.regPwd01.getText().toString();
+                String pwd2=binding.regPwd02.getText().toString();
+                String email=binding.regEmail.getText().toString();
+                String phone=binding.regPhone.getText().toString();
+                if(name!=null && pwd!=null && email!=null && phone!=null && !name.isEmpty() && !email.isEmpty() && !phone.isEmpty() && ( !pwd.isEmpty() && pwd.equals(pwd2))){
 
-                    JSONObject memberRegData=new JSONObject();
-                    memberRegData.put("name",binding.regName.getText().toString());
-                    memberRegData.put("pwd",binding.regPwd01.getText().toString());
-                    memberRegData.put("email",binding.regEmail.getText().toString());
-                    memberRegData.put("phone",binding.regPhone.getText().toString());
+                    JSONObject packet=new JSONObject();
+                    try {
 
-                    packet.put("regData",memberRegData);
-                    Log.e("JSON",packet.toString(4));
-                    Toast.makeText(registtPageActivity.this, "送出註冊資訊", Toast.LENGTH_SHORT).show();
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                        JSONObject memberRegData=new JSONObject();
+                        memberRegData.put("name",binding.regName.getText().toString());
+                        memberRegData.put("pwd",binding.regPwd01.getText().toString());
+                        memberRegData.put("email",binding.regEmail.getText().toString());
+                        memberRegData.put("phone",binding.regPhone.getText().toString());
+
+                        packet.put("regData",memberRegData);
+                        Log.e("JSON",packet.toString(4));
+                        Toast.makeText(registtPageActivity.this, "送出註冊資訊", Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    MediaType mType=MediaType.parse("application/json");
+                    RequestBody body=RequestBody.create(packet.toString(),mType);
+                    //VM IP=20.187.101.131
+                    Request request=new Request.Builder()
+                            .url("http://192.168.43.21:8216/api/member/register")
+                            .post(body)
+                            .build();
+                    SimpleeAPIWorker apiCaller=new SimpleeAPIWorker(request,registerResultHandler);
+                    //產生Task準備給executor執行
+                    executorService.execute(apiCaller);
+                }else{
+                    Toast.makeText(registtPageActivity.this, "請注意欄位不可空白,且密碼需輸入相同", Toast.LENGTH_SHORT).show();
                 }
-
-                MediaType mType=MediaType.parse("application/json");
-                RequestBody body=RequestBody.create(packet.toString(),mType);
-                //VM IP=20.187.101.131
-                Request request=new Request.Builder()
-                        .url("http://192.168.255.123:8216/api/member/register")
-                        .post(body)
-                        .build();
-                SimpleeAPIWorker apiCaller=new SimpleeAPIWorker(request,registerResultHandler);
-                //產生Task準備給executor執行
-                executorService.execute(apiCaller);
-
             }
-
         });
-
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

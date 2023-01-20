@@ -33,7 +33,6 @@ import okhttp3.Response;
 public class logPageActivity extends AppCompatActivity {
     ActivityLogPageBinding binding;
     ExecutorService executorService;
-
     SharedPreferences sharedPreferences;
     Handler loginResultHandler=new Handler(Looper.getMainLooper()){
         @Override
@@ -71,39 +70,44 @@ public class logPageActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         sharedPreferences =getSharedPreferences("User",MODE_PRIVATE);
+        String account=sharedPreferences.getString("account","null");
+        if(sharedPreferences.getBoolean("check",false) && !account.equals(null)){
+            binding.rememberme.setChecked(true);
+            binding.loginAccTV.setText(account);
+        }
 
         executorService= Executors.newSingleThreadExecutor();
-        if(getSharedPreferences("User",MODE_PRIVATE).getBoolean("check",true)){
-            binding.rememberme.setChecked(true);
-            binding.loginAccTV.setText(getSharedPreferences("User",MODE_PRIVATE).getString("account",null));
-        }
         binding.logBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //請將使用者資料 封裝成JSON格式 回傳給SpringBoot Controller進行驗證
-                JSONObject packet=new JSONObject();
-                try {
+                String name=binding.loginAccTV.getText().toString();
+                String pwd=binding.loginPwdTV.getText().toString();
+                if(name!=null && pwd!=null && !name.isEmpty() && !pwd.isEmpty()){
+                    JSONObject packet=new JSONObject();
+                    try {
+                        //把使用者資料 封裝成JSON格式 回傳給SpringBoot Controller進行驗證
+                        JSONObject memberLogData=new JSONObject();
+                        memberLogData.put("acc",binding.loginAccTV.getText().toString());
+                        memberLogData.put("pwd",binding.loginPwdTV.getText().toString());
+                        packet.put("logData",memberLogData);
+                        Log.e("JSON",packet.toString(4));
 
-                    JSONObject memberLogData=new JSONObject();
-                    memberLogData.put("acc",binding.loginAccTV.getText().toString());
-                    memberLogData.put("pwd",binding.loginPwdTV.getText().toString());
-                    packet.put("logData",memberLogData);
-                    Log.e("JSON",packet.toString(4));
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    MediaType mType=MediaType.parse("application/json");
+                    RequestBody body=RequestBody.create(packet.toString(),mType);
+                    //VM IP=20.187.101.131
+                    Request request=new Request.Builder()
+                            .url("http://192.168.43.21:8216/api/member/login")
+                            .post(body)
+                            .build();
+                    SimpleeAPIWorker apiCaller=new SimpleeAPIWorker(request,loginResultHandler);
+                    //產生Task準備給executor執行
+                    executorService.execute(apiCaller);
+                }else{
+                    Toast.makeText(logPageActivity.this, "欄位空白", Toast.LENGTH_SHORT).show();
                 }
-               MediaType mType=MediaType.parse("application/json");
-                RequestBody body=RequestBody.create(packet.toString(),mType);
-                //VM IP=20.187.101.131
-                Request request=new Request.Builder()
-                        .url("http://192.168.255.123:8216/api/member/login")
-                        .post(body)
-                        .build();
-                SimpleeAPIWorker apiCaller=new SimpleeAPIWorker(request,loginResultHandler);
-                //產生Task準備給executor執行
-                executorService.execute(apiCaller);
-
             }
         });
 
@@ -132,62 +136,20 @@ public class logPageActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 //SharedPreferences sharedPreferences =getSharedPreferences("User",MODE_PRIVATE);
                 SharedPreferences.Editor edit=sharedPreferences.edit();
+                getSharedPreferences("User",MODE_PRIVATE);
                 if(b){
-
                     edit.putString("account",binding.loginAccTV.getText().toString()).commit();
                     edit.putBoolean("check",b).commit();
                     binding.loginAccTV.setText(sharedPreferences.getString("account",null));
                 }else{
-
                     edit.remove("account").apply();
                     edit.remove("check").apply();
-                    edit.putString("account","");
+                    edit.putString("account",null);
                     edit.putBoolean("check",false).commit();
-
                 }
             }
         });
 
-
-//wu@gmail.co
     }
-
-    /*
-    class SimpleAPIWorker implements Runnable{
-        OkHttpClient client;
-        Request request;
-
-        public SimpleAPIWorker(Request request){
-            client=new OkHttpClient();
-            this.request=request;
-        }
-        @Override
-        public void run() {
-            try {
-                Response response=client.newCall(request).execute();
-                String responseString=response.body().string();
-                Log.e("API回應",responseString);
-                //Response也應該是JASON格式回傳 由APP端確認登入結果
-
-                JSONObject result=new JSONObject(responseString);
-                Message m=loginResultHandler.obtainMessage();
-                Bundle bundle=new Bundle();
-                if(result.getInt("status")==666){
-                    bundle.putString("mesg",result.getString("mesg"));
-                    bundle.putInt("status",result.getInt("status"));
-                }else{
-                    bundle.putString("mesg","登入失敗 請確認帳號及密碼是否正確");
-                    bundle.putInt("status",result.getInt("status"));
-                }
-                m.setData(bundle);
-                loginResultHandler.sendMessage(m);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
-
-     */
 
 }

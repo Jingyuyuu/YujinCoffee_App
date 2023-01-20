@@ -98,6 +98,8 @@ public class indextPageActivity extends AppCompatActivity {
                     editor.remove("phone");
                     editor.remove("email");
                     editor.apply();
+                    Intent intent = new Intent(indextPageActivity.this, logPageActivity.class);
+                    startActivity(intent);
                 }
             });
             logoutbtn.setPositiveButton("否", new DialogInterface.OnClickListener() {

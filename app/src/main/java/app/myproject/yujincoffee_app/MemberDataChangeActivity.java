@@ -54,7 +54,7 @@ public class MemberDataChangeActivity extends AppCompatActivity {
                 Boolean isPhone=binding.nameChangeT.getText().toString().isEmpty();
                 Boolean isPwd=binding.nameChangeT.getText().toString().isEmpty();
                 Boolean isPwd2=binding.nameChangeT.getText().toString().isEmpty();
-                if( name!=null && phone!=null  && !isName && !isPhone && ( !pwd.isEmpty() && !pwd2.isEmpty() && pwd.equals(pwd2) && pwd!=null)){//pwd跟pwd2要一樣 就不用判斷pwd2是不是空白的了5
+                if( name!=null && phone!=null  && !isName && !isPhone && ( !pwd.isEmpty() && pwd!=null && pwd.equals(pwd2) )){//pwd跟pwd2要一樣 就不用判斷pwd2是不是空白的了5
                     JSONObject packet=new JSONObject();
                     try {
                         JSONObject newMemberRegData=new JSONObject();
