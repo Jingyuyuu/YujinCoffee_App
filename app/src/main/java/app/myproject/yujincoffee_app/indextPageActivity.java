@@ -26,14 +26,15 @@ public class indextPageActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
 
-        binding.menubtn.setOnClickListener(new View.OnClickListener() {
+
+        binding.memberDataImgV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(indextPageActivity.this,PointChangeActivity.class);
+                Intent intent=new Intent(indextPageActivity.this,memberdataaPageActivity.class);
                 startActivity(intent);
             }
         });
-        binding.seasonnew.setOnClickListener(new View.OnClickListener() {
+        binding.newsImgV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(indextPageActivity.this,seasonnew.class);
