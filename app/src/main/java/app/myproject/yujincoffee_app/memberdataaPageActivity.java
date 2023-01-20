@@ -95,6 +95,12 @@ public class memberdataaPageActivity extends AppCompatActivity {
             }
         });
 
+        binding.cancleChangememberData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
 
