@@ -24,7 +24,7 @@ import app.myproject.yujincoffee_app.Model.Product.DrinkModel;
 import app.myproject.yujincoffee_app.Model.Product.ProductModel;
 import app.myproject.yujincoffee_app.databinding.ActivityProductOrderBinding;
 
-public class ProductOrderActivity extends AppCompatActivity {
+public class ProductOrderActivity extends AppCompatActivity  {
     ActivityProductOrderBinding binding;
     private SQLiteDatabase db;
     private ArrayList<DrinkModel> productSeries;
@@ -49,8 +49,8 @@ public class ProductOrderActivity extends AppCompatActivity {
     private int shopPrice;
     private int shopCalorie;
     private String shopName;
-    private String shopSugar;
-    private String shopIce;
+    private String shopSugar=null;
+    private String shopIce=null;
     private int shopAmount;
     private int shopTem;
 
@@ -122,57 +122,84 @@ public class ProductOrderActivity extends AppCompatActivity {
         //處理checkBox的程式碼
         //選擇是否有冷熱度可以選擇
         selectCheckBoxType(tem);
-        //甜度checkbok設置
+        //把甜度的checkbox放入checkbok陣列
         checkBoxesSugar[0]=binding.noSugar;
         checkBoxesSugar[1]=binding.microSugar;
         checkBoxesSugar[2]=binding.halfSugar;
         checkBoxesSugar[3]=binding.sugar;
-        for(int i=0;i<checkBoxesSugar.length;i++){
-            checkBoxesSugar[i].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if(isChecked){
-                        for(int j=0;j<checkBoxesSugar.length;j++){
-                            if(checkBoxesSugar[j].getText().toString().equals(buttonView.getText().toString())){
-                                checkBoxesSugar[j].setChecked(true);
-                                shopSugar=buttonView.getText().toString();
-                            }else{
-                                checkBoxesSugar[j].setChecked(false);
-                            }
+        //設定一個Listener給checkBoxSugar陣列用
+        CompoundButton.OnCheckedChangeListener checkBoxSugarListener=new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                shopSugar=null;
+                if(isChecked){
+                    for(int i=0;i<checkBoxesSugar.length;i++){
+                        if(checkBoxesSugar[i].getText().toString().equals(buttonView.getText().toString())){
+                            checkBoxesSugar[i].setChecked(true);
+
+                        }else{
+                            checkBoxesSugar[i].setChecked(false);
                         }
-                    }else{
-                        shopSugar=null;
                     }
                 }
-            });
-        }
+                for(int i=0;i<checkBoxesSugar.length;i++){
+                    if(checkBoxesSugar[i].isChecked()){
+                        shopSugar = checkBoxesSugar[i].getText().toString();
+                    }
+                }
+            }
+        };
+
+        checkBoxesSugar[0].setOnCheckedChangeListener(checkBoxSugarListener);
+        checkBoxesSugar[1].setOnCheckedChangeListener(checkBoxSugarListener);
+        checkBoxesSugar[2].setOnCheckedChangeListener(checkBoxSugarListener);
+        checkBoxesSugar[3].setOnCheckedChangeListener(checkBoxSugarListener);
+
+
+
+
+
+
+
         //冰量checkbokx設置
         checkBoxesIce[0]=binding.hot;
         checkBoxesIce[1]=binding.noIce;
         checkBoxesIce[2]=binding.microIce;
         checkBoxesIce[3]=binding.lessIce;
         checkBoxesIce[4]=binding.ice;
-
-        for( int i=0;i<checkBoxesIce.length;i++){
-            checkBoxesIce[i].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if(isChecked){
-                        for(int j=0;j<checkBoxesIce.length;j++){
-                            if(checkBoxesIce[j].getText().toString().equals(buttonView.getText().toString())){
-                                checkBoxesIce[j].setChecked(true);
-
-                                shopIce=buttonView.getText().toString();
-                            }else{
-                                checkBoxesIce[j].setChecked(false);
-                            }
+        //設定一個Listener給checkBoxesIce陣列使用
+        CompoundButton.OnCheckedChangeListener checkBoxIceListener = new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                shopIce=null;
+                if(isChecked){
+                    for(int i=0;i<checkBoxesIce.length;i++){
+                        if(checkBoxesIce[i].getText().toString().equals(buttonView.getText().toString())){
+                            checkBoxesIce[i].setChecked(true);
+                        }else{
+                            checkBoxesIce[i].setChecked(false);
                         }
-                    }else{
-                        shopIce=null;
                     }
                 }
-            });
-        }
+                for(int i=0;i<checkBoxesIce.length;i++){
+                    if(checkBoxesIce[i].isChecked()){
+                        shopIce = checkBoxesIce[i].getText().toString();
+                    }
+                }
+            }
+        };
+
+        checkBoxesIce[0].setOnCheckedChangeListener(checkBoxIceListener);
+        checkBoxesIce[1].setOnCheckedChangeListener(checkBoxIceListener);
+        checkBoxesIce[2].setOnCheckedChangeListener(checkBoxIceListener);
+        checkBoxesIce[3].setOnCheckedChangeListener(checkBoxIceListener);
+        checkBoxesIce[4].setOnCheckedChangeListener(checkBoxIceListener);
+
+
+
+
+
+
         binding.btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -195,7 +222,7 @@ public class ProductOrderActivity extends AppCompatActivity {
                                 shopAmount = Integer.parseInt(binding.productQuantity.getText().toString());
                                 if(shopAmount>0) {
                                     if (shopTem > 0) {
-                                        if (shopSugar != null && !shopSugar.equals("") && shopIce != null && !shopIce.equals("") && shopAmount > 0) {
+                                        if (shopSugar != null && !shopSugar.equals("") && shopIce != null && !shopIce.equals("")) {
                                             db.execSQL("insert into tempProductOrder (shopName,shopTem,shopSugar,shopIce,shopAmount,shopPrice,date) values (?,?,?,?,?,?,?);",
                                                     new Object[]{shopName, shopTem, shopSugar, shopIce, shopAmount, shopPrice, today});
                                             Toast.makeText(ProductOrderActivity.this, "已加入到訂單", Toast.LENGTH_SHORT).show();
@@ -207,8 +234,6 @@ public class ProductOrderActivity extends AppCompatActivity {
                                             db.execSQL("insert into tempProductOrder (shopName,shopTem,shopSugar,shopIce,shopAmount,shopPrice,date) values (?,?,?,?,?,?,?);",
                                                     new Object[]{shopName, shopTem, null, null, shopAmount, shopPrice, today});
                                             Toast.makeText(ProductOrderActivity.this, "已加入到訂單", Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            Toast.makeText(ProductOrderActivity.this, "數量不能是負數", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }else{
@@ -218,7 +243,7 @@ public class ProductOrderActivity extends AppCompatActivity {
                                 Toast.makeText(ProductOrderActivity.this, "請輸入正確數量", Toast.LENGTH_SHORT).show();
                             }
                         }else{
-                            Toast.makeText(ProductOrderActivity.this, "請輸入正確數量", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ProductOrderActivity.this, "數量不能是空的", Toast.LENGTH_SHORT).show();
                         }
                         Log.d("訂單",shopSugar+" "+shopIce);
 
