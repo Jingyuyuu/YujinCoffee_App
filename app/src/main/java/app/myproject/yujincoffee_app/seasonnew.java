@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import app.myproject.yujincoffee_app.Part2.MenuListActivity;
+
 public class seasonnew extends AppCompatActivity {
 
     SharedPreferences memberDataPre;
@@ -44,12 +46,12 @@ public class seasonnew extends AppCompatActivity {
             Intent intent=new Intent(seasonnew.this,MyOrderActivity.class);
             startActivity(intent);
         }
-        /*
+
         else if(id == R.id.itemmenu){
-            Intent intent=new Intent(seasonnew.this,MenuList.class);
+            Intent intent=new Intent(seasonnew.this, MenuListActivity.class);
             startActivity(intent);
         }
-         */
+
         else if(id == R.id.historyorder){
             Intent intent=new Intent(seasonnew.this,HistoryOrderActivity.class);
             startActivity(intent);

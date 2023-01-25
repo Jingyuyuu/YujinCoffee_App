@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import app.myproject.yujincoffee_app.Part2.MenuListActivity;
 import app.myproject.yujincoffee_app.databinding.ActivityMyFavoriteBinding;
 
 public class MyFavoriteActivity extends AppCompatActivity {
@@ -46,12 +47,12 @@ public class MyFavoriteActivity extends AppCompatActivity {
             Intent intent=new Intent(MyFavoriteActivity.this,MyOrderActivity.class);
             startActivity(intent);
         }
-        /*
+
         else if(id == R.id.itemmenu){
-            Intent intent=new Intent(MyFavoriteActivity.this,MenuList.class);
+            Intent intent=new Intent(MyFavoriteActivity.this, MenuListActivity.class);
             startActivity(intent);
         }
-         */
+
         else if(id == R.id.historyorder){
             Intent intent=new Intent(MyFavoriteActivity.this,HistoryOrderActivity.class);
             startActivity(intent);

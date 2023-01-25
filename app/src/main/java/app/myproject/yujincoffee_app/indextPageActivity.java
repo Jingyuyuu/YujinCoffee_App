@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.os.Bundle;
 import android.view.View;
 
+import app.myproject.yujincoffee_app.Part2.MenuListActivity;
 import app.myproject.yujincoffee_app.databinding.ActivityIndextPageBinding;
 import app.myproject.yujincoffee_app.databinding.ActivityLogPageBinding;
 
@@ -65,13 +66,13 @@ public class indextPageActivity extends AppCompatActivity {
             startActivity(intent);
 
         }
-        /*
+
         else if (id == R.id.itemmenu) {
-            Intent intent = new Intent(indextPageActivity.this, MenuList.class);
+            Intent intent = new Intent(indextPageActivity.this, MenuListActivity.class);
             startActivity(intent);
 
         }
-         */
+
         else if (id == R.id.historyorder) {
             Intent intent = new Intent(indextPageActivity.this, HistoryOrderActivity.class);
             startActivity(intent);
@@ -112,7 +113,6 @@ public class indextPageActivity extends AppCompatActivity {
             AlertDialog dialog = logoutbtn.create();
             dialog.show();
         }
-
         return true;
     }
 

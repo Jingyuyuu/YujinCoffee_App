@@ -27,7 +27,7 @@ public class SimpleeAPIWorker implements Runnable{
             Response response=client.newCall(request).execute();
             String responseString=response.body().string();
             Log.e("API回應",responseString);
-            //Response也應該是JASON格式回傳 由APP端確認登入結果
+            //Response也應該是JSON格式回傳 由APP端確認登入結果
 
             JSONObject result=new JSONObject(responseString);
 

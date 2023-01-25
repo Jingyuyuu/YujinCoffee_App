@@ -17,6 +17,7 @@ import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 
+import app.myproject.yujincoffee_app.Part2.MenuListActivity;
 import app.myproject.yujincoffee_app.databinding.ActivityStorelistBinding;
 
 public class storelistActivity extends AppCompatActivity {
@@ -49,12 +50,11 @@ public class storelistActivity extends AppCompatActivity {
             Intent intent=new Intent(storelistActivity.this,MyOrderActivity.class);
             startActivity(intent);
         }
-        /*
+
         else if(id == R.id.itemmenu){
-            Intent intent=new Intent(storelistActivity.this,MenuList.class);
+            Intent intent=new Intent(storelistActivity.this, MenuListActivity.class);
             startActivity(intent);
         }
-         */
         else if(id == R.id.historyorder){
             Intent intent=new Intent(storelistActivity.this,HistoryOrderActivity.class);
             startActivity(intent);

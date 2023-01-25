@@ -9,12 +9,14 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="-255dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textView7"
@@ -38,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="500點"
-                android:textSize="25sp"/>
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/textView14"
@@ -49,16 +51,16 @@
                 android:id="@+id/textView15"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="手沖咖啡壺(大)"
                 android:gravity="center"
-                android:textSize="25sp"/>
+                android:text="手沖咖啡壺(大)"
+                android:textSize="25sp" />
 
             <ImageButton
                 android:id="@+id/imageButton2"
                 android:layout_width="250sp"
                 android:layout_height="300sp"
-                android:scaleType="fitXY"
                 android:layout_gravity="center_horizontal"
+                android:scaleType="fitXY"
                 app:srcCompat="@drawable/point4" />
 
             <TextView
@@ -87,8 +89,8 @@
                 android:id="@+id/textView19"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="手沖咖啡壺(小)"
                 android:gravity="center"
+                android:text="手沖咖啡壺(小)"
                 android:textSize="25sp" />
 
             <ImageButton
@@ -125,8 +127,8 @@
                 android:id="@+id/textView23"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="雲朵壺+濾網組"
                 android:gravity="center"
+                android:text="雲朵壺+濾網組"
                 android:textSize="25sp" />
 
             <ImageButton
