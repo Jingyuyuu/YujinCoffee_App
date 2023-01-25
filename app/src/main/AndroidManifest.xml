@@ -16,6 +16,12 @@
         android:theme="@style/Theme.YujinCoffee_App"
         tools:targetApi="31">
         <activity
+            android:name="app.myproject.yujincoffee_app.Part2.ProductOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name="app.myproject.yujincoffee_app.Part2.MenuListActivity"
+            android:exported="false" />
+        <activity
             android:name=".MemberDataChangeActivity"
             android:exported="false" />
         <activity

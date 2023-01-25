@@ -24,6 +24,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import app.myproject.yujincoffee_app.Modle.Util.SimpleeAPIWorker;
+import app.myproject.yujincoffee_app.Part2.MenuListActivity;
 import app.myproject.yujincoffee_app.databinding.ActivityMemberdataaPageBinding;
 import app.myproject.yujincoffee_app.databinding.ActivityRegisttPageBinding;
 import okhttp3.MediaType;
@@ -159,13 +160,13 @@ public class memberdataaPageActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         }
-        /*
+
         else if(id == R.id.itemmenu){
-            Intent intent=new Intent(memberdataaPageActivity.this,MenuList.class);
+            Intent intent=new Intent(memberdataaPageActivity.this, MenuListActivity.class);
             startActivity(intent);
             return true;
         }
-         */
+
         else if(id == R.id.historyorder){
             Intent intent=new Intent(memberdataaPageActivity.this,HistoryOrderActivity.class);
             startActivity(intent);

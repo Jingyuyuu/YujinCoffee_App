@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import app.myproject.yujincoffee_app.Part2.MenuListActivity;
 import app.myproject.yujincoffee_app.databinding.ActivityHistoryOrderBinding;
 
 public class HistoryOrderActivity extends AppCompatActivity {
@@ -46,12 +47,12 @@ public class HistoryOrderActivity extends AppCompatActivity {
             Intent intent=new Intent(HistoryOrderActivity.this,MyOrderActivity.class);
             startActivity(intent);
         }
-        /*
+
         else if(id == R.id.itemmenu){
-            Intent intent=new Intent(HistoryOrderActivity.this,MenuList.class);
+            Intent intent=new Intent(HistoryOrderActivity.this, MenuListActivity.class);
             startActivity(intent);
         }
-         */
+
         else if(id == R.id.historyorder){
             Intent intent=new Intent(HistoryOrderActivity.this,HistoryOrderActivity.class);
             startActivity(intent);
