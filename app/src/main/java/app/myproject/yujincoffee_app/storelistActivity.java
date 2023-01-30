@@ -23,6 +23,7 @@ import app.myproject.yujincoffee_app.databinding.ActivityStorelistBinding;
 public class storelistActivity extends AppCompatActivity {
 
      ActivityStorelistBinding binding;
+     SQLiteDatabase db;
     SharedPreferences memberDataPre;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class storelistActivity extends AppCompatActivity {
         ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
+    //建立Menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main,menu);
